@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>upload模块快速使用</title>
+    <link rel="stylesheet" href="/demo/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<button type="button" class="layui-btn" id="test2">
+    <i class="layui-icon">&#xe67c;</i>上传文件
+</button>
+
+<script src="/demo/layui/layui.js"></script>
+<script>
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //指定允许上传的文件类型
+        var uploadInst = upload.render({
+            elem: '#test2'
+            , url: '/demo/upload/uploadFileTxt' //改成您自己的上传接口
+            , accept: 'file' //普通文件
+            , done: function (res) {
+                layer.msg('上传成功');
+                console.log(res);
+                var msg = "成功上传: "+res.data.succse+", 忽略重复: "+ res.data.rep +
+                    "; 其中移动号码："+res.data.yd + ", 电信号码："+ res.data.dx + ", 联通号码："+res.data.lt;
+                layer.open({
+                    title:'提示',
+                    type:0,
+                    content: msg
+                })
+            }
+        });
+    });
+</script>
+</body>
+</html>
